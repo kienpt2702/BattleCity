@@ -48,10 +48,7 @@ public class Bullet {
         for(Character character: panel.list){
             if(collision(character)){
                 if(this.source.getClass() != character.getClass()){
-                    panel.trash.add(character);
-                    if(character instanceof Enemy){
-                        panel.controlObject.totalEnemy--;
-                    }
+                    character.damaged();
                     explode = true;
                 }
                 panel.trash.add(this);

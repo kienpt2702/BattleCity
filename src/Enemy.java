@@ -49,11 +49,16 @@ public class Enemy extends Character{
             else direction = 1;
             changeSpeed();
         }
-        if(y + speedY > panel.getHeight() - image.getHeight() || y + speedY < 0){
+        if(y + speedY > panel.getHeight()-50 - image.getHeight() || y + speedY < 0){
             speedY *= -1;
             if(speedY > 0) direction = 0;
             else direction = 3;
             changeSpeed();
         }
+    }
+    @Override
+    public void damaged(){
+        super.damaged();
+        panel.controlObject.totalEnemy--;
     }
 }

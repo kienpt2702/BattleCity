@@ -19,7 +19,7 @@ public class MyPanel extends JPanel implements Runnable{
     boolean isRunning;
     public MyPanel(){
         controlObject.init();
-        this.setPreferredSize(new Dimension(600,600));
+        this.setPreferredSize(new Dimension(600,650));
         this.addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {

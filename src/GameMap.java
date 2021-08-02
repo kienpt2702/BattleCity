@@ -41,7 +41,7 @@ public class GameMap {
         for (int i = 0; i < grids.length; i++) {
             for (int j = 0; j < grids[i].length; j++){
                 int value = grids[i][j];
-                if(value == 0 || value == 1) grid.paint(g2d, j*30, i*30, value);
+                grid.paint(g2d, j*30, i*30, value);
             }
         }
     }

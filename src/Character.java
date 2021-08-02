@@ -38,7 +38,7 @@ abstract class Character {
         if(x + speedX > panel.getWidth() - image.getWidth() || x + speedX < 0){
             speedX = 0;
         }
-        if(y + speedY > panel.getHeight() - image.getHeight() || y + speedY < 0){
+        if(y + speedY > panel.getHeight()-50 - image.getHeight() || y + speedY < 0){
             speedY = 0;
         }
     }
@@ -65,6 +65,9 @@ abstract class Character {
             reloadTime = 50;
             new Bullet(panel,x+13,y+13,direction,this);
         }
+    }
+    public void damaged(){
+        panel.trash.add(this);
     }
     public void changeSpeed(){
         switch (direction) {

@@ -8,8 +8,10 @@ import java.util.HashMap;
 
 public class Player extends Character{
     boolean pressOtherKey;
+    private int health;
     public Player(MyPanel panel){
         super(panel);
+        health = 3;
         allImage = new HashMap<>();
         try {
             for(int i =0; i <=3; i++){
@@ -62,6 +64,12 @@ public class Player extends Character{
     public void playerReleased(){
         speedX = 0;
         speedY = 0;
+    }
+    @Override
+    public void damaged(){
+        health--;
+        if(health <=0) panel.trash.add(this);
+        else x = y = 0;
     }
     @Override
     public void move(){
