@@ -9,7 +9,7 @@ public class MyPanel extends JPanel implements Runnable{
     boolean exit;
     Thread thread;
     Player player;
-    ControlObject controlObject = new ControlObject(this);
+    ControlObject controlObject;
     ArrayList<Character> list = new ArrayList<>();
     ArrayList<Bullet> bullets = new ArrayList<>();
     ArrayList<Explosion> explosions = new ArrayList<>();
@@ -18,7 +18,8 @@ public class MyPanel extends JPanel implements Runnable{
     GameMap gameMap = new GameMap(this);
     boolean isRunning;
     public MyPanel(){
-        controlObject.init();
+        controlObject = new ControlObject(this);
+//        controlObject.init();
         this.setPreferredSize(new Dimension(600,650));
         this.addKeyListener(new KeyListener() {
             @Override

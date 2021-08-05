@@ -1,7 +1,6 @@
 import java.awt.*;
 
 public class GameMap {
-    MyPanel panel;
     Grid grid;
     int[][] grids = {
             { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, },
@@ -26,7 +25,6 @@ public class GameMap {
             { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, }
     };
     public GameMap(MyPanel panel) {
-        this.panel = panel;
         grid = new Grid();
         for(int i = 0; i < grids.length; i++){
             for(int j = 0; j < grids[i].length; j++){

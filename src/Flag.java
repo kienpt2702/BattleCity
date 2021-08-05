@@ -8,12 +8,15 @@ public class Flag extends Block{
         health = 1;
     }
     @Override
-    public void setUp(int x, int y){
+    public void setImage(){
         try {
             image = ImageIO.read(new File("C:\\Users\\Bach_Vuong\\IdeaProjects\\MyGame\\png\\flag.png"));
         } catch (IOException e) {
         }
-        this.x = x*image.getWidth();
-        this.y = y*image.getHeight();
+    }
+    @Override
+    public void getDamage(){
+        super.getDamage();
+        panel.gameMap.grids[coorX][coorY] = -1;
     }
 }

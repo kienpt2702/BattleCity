@@ -65,6 +65,7 @@ public class Player extends Character{
         speedX = 0;
         speedY = 0;
     }
+    public int getHealth(){return health;}
     @Override
     public void damaged(){
         health--;

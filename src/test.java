@@ -1,3 +1,4 @@
+import java.lang.reflect.Array;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.*;
@@ -16,19 +17,15 @@ public class test{
         System.out.println(s2);
     }
     public static void main(String[] args) {
-        test t1 = new test("t1");
-        test t2 = new test("t2");
-        test temp = t1;
-        t1 = t2;
-        t2 = temp;
-        System.out.println(temp.name);
-        System.out.println(t1.name);
-        System.out.println(t2.name);
-        String s1 = "Hello";
-        String s2 = "Hello";
-        String s3 = new String("Hello");
-        System.out.println(s1==s3);
-        System.out.println(s1== s3.intern());
-        System.out.println(s3 == s1);
+        ArrayList<String> list = new ArrayList<>();
+        list.add("k");
+        list.add("quang");
+        list.sort(new Comparator<String>() {
+            @Override
+            public int compare(String o1, String o2) {
+                return o1.compareTo(o2);
+            }
+        });
+        System.out.println(list);
     }
 }

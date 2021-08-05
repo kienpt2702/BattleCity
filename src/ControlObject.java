@@ -1,12 +1,15 @@
 import java.awt.*;
 
 public class ControlObject {
+    ControlLife controlLife;
     MyPanel panel;
     int totalEnemy = 6;
     int enemyLeft;
     private static final int ENEMY_ON_STAGE = 5;
     public ControlObject(MyPanel panel){
         this.panel = panel;
+        this.init();
+        controlLife = new ControlLife(this);
     }
     public void init(){
         panel.player = new Player(panel);
