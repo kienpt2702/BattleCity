@@ -8,7 +8,6 @@ import java.util.ArrayList;
 public class MyPanel extends JPanel implements Runnable{
     boolean exit;
     Thread thread;
-    Player player;
     ControlObject controlObject;
     ArrayList<Character> list = new ArrayList<>();
     ArrayList<Bullet> bullets = new ArrayList<>();
@@ -27,7 +26,7 @@ public class MyPanel extends JPanel implements Runnable{
             }
             @Override
             public void keyPressed(KeyEvent e) {
-                player.playerPressed(e);
+                controlObject.player.playerPressed(e);
                 switch (e.getKeyCode()){
                     case KeyEvent.VK_ENTER:
                         isRunning = !isRunning;
@@ -39,7 +38,7 @@ public class MyPanel extends JPanel implements Runnable{
             }
             @Override
             public void keyReleased(KeyEvent e) {
-                player.playerReleased();
+                controlObject.player.playerReleased();
             }
         });
         this.setFocusable(true);

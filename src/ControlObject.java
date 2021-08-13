@@ -6,13 +6,14 @@ public class ControlObject {
     int totalEnemy = 6;
     int enemyLeft;
     private static final int ENEMY_ON_STAGE = 5;
+    Player player;
     public ControlObject(MyPanel panel){
         this.panel = panel;
         this.init();
         controlLife = new ControlLife(this);
     }
     public void init(){
-        panel.player = new Player(panel);
+        player = new Player(panel);
         for(int i =0; i< ENEMY_ON_STAGE; i++) new Enemy(panel);
         enemyLeft = totalEnemy - ENEMY_ON_STAGE;
     }
@@ -24,7 +25,7 @@ public class ControlObject {
             bullet.move();
         }
         this.removeTrash();
-        if(panel.list.size()-1 < ENEMY_ON_STAGE && enemyLeft> 0 && panel.list.contains(panel.player)){
+        if(panel.list.size()-1 < ENEMY_ON_STAGE && enemyLeft> 0 && panel.list.contains(player)){
             new Enemy(panel);
             enemyLeft--;
         }
@@ -43,6 +44,7 @@ public class ControlObject {
         for(Explosion explosion: panel.explosions){
             explosion.paint(g2d);
         }
+        controlLife.paint(g2d);
     }
     private void removeTrash(){
         panel.list.removeIf(character -> panel.trash.contains(character));
