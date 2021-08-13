@@ -10,7 +10,7 @@ public class Flag extends Block{
     @Override
     public void setImage(){
         try {
-            image = ImageIO.read(new File("C:\\Users\\Bach_Vuong\\IdeaProjects\\MyGame\\png\\flag.png"));
+            image = ImageIO.read(new File("png/flag.png"));
         } catch (IOException e) {
         }
     }
