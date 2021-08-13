@@ -77,4 +77,10 @@ public class Player extends Character{
         this.condition();
         super.move();
     }
+    @Override
+    public void fire(){
+        if(bullet == null){
+            bullet = new Bullet(panel,x+13,y+13,direction,this);
+        }
+    }
 }

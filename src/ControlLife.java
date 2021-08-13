@@ -17,10 +17,10 @@ public class ControlLife {
     }
     public void paint(Graphics2D g2d){
         for(int i = 0; i< controlObject.totalEnemy; i++){
-            g2d.drawImage(enemyCounter,(i* enemyCounter.getWidth()+10),600,null);
+            g2d.drawImage(enemyCounter,i* (enemyCounter.getWidth()+10),600,null);
         }
         for(int i = 0; i< controlObject.player.getHealth(); i++){
-            g2d.drawImage(playerCounter,(i* playerCounter.getWidth()+10),630,null);
+            g2d.drawImage(playerCounter,i* (playerCounter.getWidth()+10),630,null);
         }
     }
 }

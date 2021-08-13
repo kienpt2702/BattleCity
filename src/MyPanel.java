@@ -14,9 +14,10 @@ public class MyPanel extends JPanel implements Runnable{
     ArrayList<Explosion> explosions = new ArrayList<>();
     ArrayList<Block> blocks = new ArrayList<>();
     ArrayList trash = new ArrayList<>();
-    GameMap gameMap = new GameMap(this);
+    GameMap gameMap;
     boolean isRunning;
     public MyPanel(){
+        gameMap = new GameMap(this);
         controlObject = new ControlObject(this);
 //        controlObject.init();
         this.setPreferredSize(new Dimension(600,650));
@@ -48,7 +49,6 @@ public class MyPanel extends JPanel implements Runnable{
         super.paint(g);
         Graphics2D g2d = (Graphics2D) g;
         controlObject.paint(g2d);
-        g2d.drawString(""+controlObject.totalEnemy,10,10);
     }
     public void update(){
         controlObject.update();

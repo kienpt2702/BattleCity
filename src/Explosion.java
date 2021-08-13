@@ -16,7 +16,7 @@ public class Explosion {
     }
     public void paint(Graphics2D g2d){
         try {
-            image = ImageIO.read(new File("C:\\Users\\Bach_Vuong\\IdeaProjects\\MyGame\\png\\Explosion\\"+count+".png"));
+            image = ImageIO.read(new File("png/Explosion/"+count+".png"));
         } catch (IOException e) {
         }
         g2d.drawImage(image,x,y,null);

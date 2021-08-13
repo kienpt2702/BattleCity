@@ -1,20 +1,22 @@
+
 import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Random;
 
 public class Enemy extends Character{
     Random rand = new Random();
+    HashSet<Integer> blockPosition;
     int timeToChangeDirection;
-    public Enemy(MyPanel panel){
+    public Enemy(MyPanel panel, int x, int y){
         super(panel);
+        blockPosition = panel.gameMap.blockPosition;
         reloadTime = 70;
         direction = rand.nextInt(3);
         this.changeSpeed();
-        x = rand.nextInt(500);
-        y = rand.nextInt(500);
         allImage = new HashMap<>();
         try {
             for(int i =0; i <=3; i++){
@@ -27,6 +29,8 @@ public class Enemy extends Character{
         } catch (IOException e) {
         }
         image = allImage.get(direction).get(0);
+        this.x = x;
+        this.y = y;
     }
     @Override
     public void move(){
@@ -60,5 +64,12 @@ public class Enemy extends Character{
     public void damaged(){
         super.damaged();
         panel.controlObject.totalEnemy--;
+    }
+    @Override
+    public void fire(){
+        if(reloadTime <=0 && bullet == null){
+            reloadTime = 70;
+            bullet = new Bullet(panel,x+13,y+13,direction,this);
+        }
     }
 }

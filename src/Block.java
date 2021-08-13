@@ -31,7 +31,7 @@ public class Block{
     public void getDamage(){
         health--;
         if(health <= 0) {
-            panel.gameMap.grids[coorX][coorY] = 1;
+            panel.gameMap.grids[coorX][coorY] = 0;
             panel.trash.add(this);
         }
     }
@@ -40,5 +40,8 @@ public class Block{
     }
     public Rectangle2D getRectangle2D(){
         return new Rectangle2D.Double(x+7,y+7,image.getWidth()-7,image.getHeight()-7);
+    }
+    public Rectangle2D getRectangle2D(boolean bullet){
+        return new Rectangle2D.Double(x,y,image.getWidth(),image.getHeight());
     }
 }

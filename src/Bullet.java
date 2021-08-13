@@ -29,19 +29,19 @@ public class Bullet {
     public void move(){
         switch (direction){
             case 0:
-                speedY = 5;
+                speedY = 3;
                 speedX = 0;
                 break;
             case 1:
-                speedX = -5;
+                speedX = -3;
                 speedY = 0;
                 break;
             case 2:
-                speedX = 5;
+                speedX = 3;
                 speedY = 0;
                 break;
             case 3:
-                speedY = -5;
+                speedY = -3;
                 speedX = 0;
                 break;
         }
@@ -51,21 +51,20 @@ public class Bullet {
                     character.damaged();
                     explode = true;
                 }
-                panel.trash.add(this);
+                this.getDamage();
                 break;
             }
         }
         for(Bullet bullet: panel.bullets){
             if(collision(bullet) && this != bullet){
                 explode = true;
-                panel.trash.add(bullet);
-                panel.trash.add(this);
+                this.getDamage();
                 break;
             }
         }
         for(Block block: panel.blocks){
-            if(panel.collison(this.getRectangle2D(), block.getRectangle2D())){
-                panel.trash.add(this);
+            if(this.collision(block)){
+                this.getDamage();
                 explode = true;
                 block.getDamage();
                 break;
@@ -75,6 +74,17 @@ public class Bullet {
         x += speedX;
         y += speedY;
     }
+    private void getDamage(){
+        panel.trash.add(this);
+        this.source.bullet = null;
+    }
+    public boolean needToDelete(){
+        if(x >= 600 || x <=0 || y<= 0|| y>=600 || panel.trash.contains(this)){
+            this.source.bullet = null;
+            return true;
+        }
+        return false;
+    }
     public boolean collision(Character character){
         if(this.source == character){
             return false;
@@ -83,6 +93,9 @@ public class Bullet {
     }
     public boolean collision(Bullet bullet){
         return panel.collison(this.getRectangle2D(), bullet.getRectangle2D());
+    }
+    public boolean collision(Block block){
+        return panel.collison(this.getRectangle2D(), block.getRectangle2D(true));
     }
 
     public Rectangle2D getRectangle2D(){

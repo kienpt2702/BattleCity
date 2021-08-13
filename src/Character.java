@@ -7,11 +7,12 @@ import java.util.HashMap;
 abstract class Character {
     int x, y, speedX, speedY;
     int count, direction;
-    int reloadTime = 50;
+    int reloadTime;
     MyPanel panel;
     HashMap<Integer, ArrayList<BufferedImage>> allImage;
     ArrayList<BufferedImage> imageDirection;
     BufferedImage image;
+    Bullet bullet;
     public Character(MyPanel panel){
         this.panel = panel;
         panel.list.add(this);
@@ -60,31 +61,32 @@ abstract class Character {
         }
         return false;
     }
-    public void fire(){
-        if(reloadTime <= 0){
-            reloadTime = 50;
-            new Bullet(panel,x+13,y+13,direction,this);
-        }
-    }
+//    public void fire(){
+//        if(reloadTime <=0 && bullet == null){
+//            reloadTime = 75;
+//            bullet = new Bullet(panel,x+13,y+13,direction,this);
+//        }
+//    }
+    abstract public void fire();
     public void damaged(){
         panel.trash.add(this);
     }
     public void changeSpeed(){
         switch (direction) {
             case 0:
-                speedY = 3;
+                speedY = 2;
                 speedX = 0;
                 break;
             case 1:
-                speedX = -3;
+                speedX = -2;
                 speedY = 0;
                 break;
             case 2:
-                speedX = 3;
+                speedX = 2;
                 speedY = 0;
                 break;
             case 3:
-                speedY = -3;
+                speedY = -2;
                 speedX = 0;
                 break;
         }
