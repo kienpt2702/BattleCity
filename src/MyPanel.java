@@ -48,7 +48,6 @@ public class MyPanel extends JPanel implements Runnable{
         super.paint(g);
         Graphics2D g2d = (Graphics2D) g;
         controlObject.paint(g2d);
-        g2d.drawString(""+controlObject.totalEnemy,10,10);
     }
     public void update(){
         controlObject.update();
