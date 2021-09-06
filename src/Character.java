@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 abstract class Character {
-    int x, y, speedX, speedY;
+    int x, y, speedX, speedY, immortalTime;
     int count, direction;
     int reloadTime;
     MyPanel panel;
@@ -16,11 +16,13 @@ abstract class Character {
     public Character(MyPanel panel){
         this.panel = panel;
         panel.list.add(this);
+        immortalTime = 100;
     }
     public void paint(Graphics2D g2d){
         g2d.drawImage(image,x,y,null);
     }
     public void move() {
+        immortalTime--;
         int prevX = x;
         int prevY = y;
         x += speedX;
@@ -29,8 +31,7 @@ abstract class Character {
             x = prevX;
             y = prevY;
         }
-        count++;
-        if (count >2){
+        if (++count >2){
             count = 0;
         }
         reloadTime--;
@@ -59,18 +60,18 @@ abstract class Character {
                 return true;
             }
         }
+        for(RandomObject randomObject: panel.randomObjects){
+            if(panel.collison(this.getRectangle2D(), randomObject.getRectangle2D())){
+                panel.trash.add(randomObject);
+                randomObject.effect(this);
+                break;
+            }
+        }
         return false;
     }
-//    public void fire(){
-//        if(reloadTime <=0 && bullet == null){
-//            reloadTime = 75;
-//            bullet = new Bullet(panel,x+13,y+13,direction,this);
-//        }
-//    }
     abstract public void fire();
-    public void damaged(){
-        panel.trash.add(this);
-    }
+    abstract public void damaged();
+    public void increaseHealth(){}
     public void changeSpeed(){
         switch (direction) {
             case 0:

@@ -45,34 +45,45 @@ public class Bullet {
                 speedX = 0;
                 break;
         }
+        if(this.isExplode()){
+            new Explosion(panel,x,y);
+            speedX = speedY = 0;
+        }
+        x += speedX;
+        y += speedY;
+    }
+    private boolean isExplode(){
         for(Character character: panel.list){
             if(collision(character)){
+                this.getDamage();
                 if(this.source.getClass() != character.getClass()){
                     character.damaged();
-                    explode = true;
+                    return true;
                 }
-                this.getDamage();
-                break;
             }
         }
         for(Bullet bullet: panel.bullets){
             if(collision(bullet) && this != bullet){
-                explode = true;
                 this.getDamage();
-                break;
+                bullet.getDamage();
+                return true;
             }
         }
         for(Block block: panel.blocks){
             if(this.collision(block)){
                 this.getDamage();
-                explode = true;
                 block.getDamage();
+                return true;
+            }
+        }
+        for(RandomObject randomObject: panel.randomObjects){
+            if(this.collision(randomObject)){
+                randomObject.effect(this.source);
+                this.getDamage();
                 break;
             }
         }
-        if(explode) new Explosion(panel,x,y);
-        x += speedX;
-        y += speedY;
+        return false;
     }
     private void getDamage(){
         panel.trash.add(this);
@@ -97,7 +108,9 @@ public class Bullet {
     public boolean collision(Block block){
         return panel.collison(this.getRectangle2D(), block.getRectangle2D(true));
     }
-
+    public boolean collision(RandomObject randomObject){
+        return panel.collison(this.getRectangle2D(), randomObject.getRectangle2D());
+    }
     public Rectangle2D getRectangle2D(){
         return new Rectangle2D.Double(x,y,image.getWidth(), image.getHeight());
     }

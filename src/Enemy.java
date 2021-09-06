@@ -4,18 +4,15 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Random;
 
 public class Enemy extends Character{
     Random rand = new Random();
-    HashSet<Integer> blockPosition;
     int timeToChangeDirection;
     public Enemy(MyPanel panel, int x, int y){
         super(panel);
-        blockPosition = panel.gameMap.blockPosition;
         reloadTime = 70;
-        direction = rand.nextInt(3);
+        direction = rand.nextInt(4);
         this.changeSpeed();
         allImage = new HashMap<>();
         try {
@@ -35,9 +32,9 @@ public class Enemy extends Character{
     @Override
     public void move(){
         timeToChangeDirection++;
-        if(timeToChangeDirection >= 100){
+        if(timeToChangeDirection >= 150){
             timeToChangeDirection= 0;
-            direction = rand.nextInt(3);
+            direction = rand.nextInt(4);
             changeSpeed();
         }
         this.condition();
@@ -62,14 +59,24 @@ public class Enemy extends Character{
     }
     @Override
     public void damaged(){
-        super.damaged();
-        panel.controlObject.totalEnemy--;
+        if(immortalTime <= 0){
+            panel.trash.add(this);
+            panel.controlMusic.add("Battle City (MP3)/SFX destroy.wav");
+            panel.controlObject.totalEnemy--;
+        }
     }
     @Override
     public void fire(){
         if(reloadTime <=0 && bullet == null){
             reloadTime = 70;
             bullet = new Bullet(panel,x+13,y+13,direction,this);
+        }
+    }
+    @Override
+    public void increaseHealth(){
+        if(panel.controlObject.totalEnemy < 10){
+            panel.controlObject.totalEnemy++;
+            panel.controlObject.enemyLeft++;
         }
     }
 }

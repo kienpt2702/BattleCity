@@ -1,5 +1,8 @@
 public class Game {
-    public static void main(String[] args) {
+    public Game(){
         new MyFrame();
+    }
+    public static void main(String[] args) {
+        new Game();
     }
 }
