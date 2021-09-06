@@ -1,7 +1,5 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 
@@ -9,40 +7,20 @@ public class MyPanel extends JPanel implements Runnable{
     boolean exit;
     Thread thread;
     ControlObject controlObject;
+    ControlMusic controlMusic;
     ArrayList<Character> list = new ArrayList<>();
     ArrayList<Bullet> bullets = new ArrayList<>();
     ArrayList<Explosion> explosions = new ArrayList<>();
     ArrayList<Block> blocks = new ArrayList<>();
     ArrayList trash = new ArrayList<>();
+    ArrayList<RandomObject> randomObjects = new ArrayList<>();
     GameMap gameMap;
     boolean isRunning;
     public MyPanel(){
         gameMap = new GameMap(this);
         controlObject = new ControlObject(this);
-//        controlObject.init();
+        controlMusic = new ControlMusic();
         this.setPreferredSize(new Dimension(600,650));
-        this.addKeyListener(new KeyListener() {
-            @Override
-            public void keyTyped(KeyEvent e) {
-            }
-            @Override
-            public void keyPressed(KeyEvent e) {
-                controlObject.player.playerPressed(e);
-                switch (e.getKeyCode()){
-                    case KeyEvent.VK_ENTER:
-                        isRunning = !isRunning;
-                        break;
-                    case KeyEvent.VK_ESCAPE:
-                        exit = true;
-                        break;
-                }
-            }
-            @Override
-            public void keyReleased(KeyEvent e) {
-                controlObject.player.playerReleased();
-            }
-        });
-        this.setFocusable(true);
     }
     @Override
     public void paint(Graphics g){
@@ -52,6 +30,7 @@ public class MyPanel extends JPanel implements Runnable{
     }
     public void update(){
         controlObject.update();
+        controlMusic.update();
     }
 
     public boolean collison(Rectangle2D thisObject, Rectangle2D otherObject){
@@ -60,6 +39,7 @@ public class MyPanel extends JPanel implements Runnable{
     public void startGame(){
         if(thread == null){
             isRunning = true;
+            controlMusic.init();
             thread = new Thread(this);
             thread.start();
         }
@@ -68,8 +48,8 @@ public class MyPanel extends JPanel implements Runnable{
     @Override
     public void run() {
         while (!exit){
-            Thread.onSpinWait();
-            while (isRunning){
+            System.out.print("");
+            if(isRunning){
                 this.update();
                 this.repaint();
                 try {
@@ -79,5 +59,11 @@ public class MyPanel extends JPanel implements Runnable{
                 if(exit) break;
             }
         }
+        System.out.println("outLoop");
+    }
+
+    public void endGame(){
+        isRunning = false;
+        controlMusic.stopMusic();
     }
 }

@@ -50,7 +50,7 @@ public class Player extends Character{
                 count = 0;
                 pressOtherKey = true;
         }
-        this.changeSpeed();
+        super.changeSpeed();
         if(shot) speedX = speedY = 0;
         if(pressOtherKey){
             speedX = speedY = 0;
@@ -68,19 +68,32 @@ public class Player extends Character{
     public int getHealth(){return health;}
     @Override
     public void damaged(){
-        health--;
-        if(health <=0) panel.trash.add(this);
-        else x = y = 0;
+        if(immortalTime <= 0){
+            health--;
+            if(health <= 0) {
+                panel.trash.add(this);
+                panel.controlMusic.add("Battle City (MP3)/SFX destroy.wav");
+
+            } else{
+                x = y = 0;
+                panel.controlMusic.add("Battle City (MP3)/SFX revive.wav");
+                immortalTime = 100;
+            }
+        }
     }
     @Override
     public void move(){
-        this.condition();
+        super.condition();
         super.move();
     }
     @Override
     public void fire(){
-        if(bullet == null){
+        if(bullet == null && health > 0){
             bullet = new Bullet(panel,x+13,y+13,direction,this);
         }
+    }
+    @Override
+    public void increaseHealth(){
+        if(health < 3) health++;
     }
 }
