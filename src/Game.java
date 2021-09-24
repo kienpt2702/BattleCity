@@ -1,6 +1,6 @@
 public class Game {
     public Game(){
-        new MyFrame();
+        new GameFrame();
     }
     public static void main(String[] args) {
         new Game();

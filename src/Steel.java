@@ -3,7 +3,7 @@ import java.io.File;
 import java.io.IOException;
 
 public class Steel extends Block{
-    public Steel(MyPanel panel, int x, int y){
+    public Steel(GamePanel panel, int x, int y){
         super(panel,x,y);
     }
     @Override

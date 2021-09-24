@@ -7,11 +7,12 @@ import java.io.IOException;
 
 public class Bullet {
     int x, y, speedX, speedY, direction;
+    Explosion explosion;
     BufferedImage image;
-    MyPanel panel;
+    GamePanel panel;
     Character source;
-    boolean explode;
-    public Bullet(MyPanel panel, int x, int y, int direction, Character source){
+    boolean slowDown, explode;
+    public Bullet(GamePanel panel, int x, int y, int direction, Character source){
         this.panel = panel;
         this.x = x;
         this.y = y;
@@ -22,43 +23,92 @@ public class Bullet {
         } catch (IOException e) {
         }
         this.panel.bullets.add(this);
+        explosion = new Explosion(this);
     }
     public void paint(Graphics2D g2d){
-        g2d.drawImage(image, x,y,null);
+        if(!explode){
+            g2d.drawImage(image,x,y,null);
+        }
+//        g2d.drawImage(image, x,y,null);
+        else{
+            explosion.paint(g2d,x,y);
+        }
     }
     public void move(){
-        switch (direction){
-            case 0:
-                speedY = 3;
-                speedX = 0;
-                break;
-            case 1:
-                speedX = -3;
-                speedY = 0;
-                break;
-            case 2:
-                speedX = 3;
-                speedY = 0;
-                break;
-            case 3:
-                speedY = -3;
-                speedX = 0;
-                break;
+//        switch (direction){
+//            case 0:
+//                speedY = 4;
+//                speedX = 0;
+//                break;
+//            case 1:
+//                speedX = -4;
+//                speedY = 0;
+//                break;
+//            case 2:
+//                speedX = 4;
+//                speedY = 0;
+//                break;
+//            case 3:
+//                speedY = -4;
+//                speedX = 0;
+//                break;
+//        }
+//        if(!this.isExplode()){
+//            if(slowDown){
+//                x += speedX/2;
+//                y += speedY/2;
+//                slowDown = false;
+//            }
+//            else{
+//                x += speedX;
+//                y += speedY;
+//            }
+//        }
+//        else{
+//            new Explosion(panel,x,y);
+//        }
+        if(!explode){
+            switch (direction) {
+                case 0 -> {
+                    speedY = 4;
+                    speedX = 0;
+                }
+                case 1 -> {
+                    speedX = -4;
+                    speedY = 0;
+                }
+                case 2 -> {
+                    speedX = 4;
+                    speedY = 0;
+                }
+                case 3 -> {
+                    speedY = -4;
+                    speedX = 0;
+                }
+            }
+            if(slowDown){
+                    x += speedX/2;
+                    y += speedY/2;
+                    slowDown = false;
+            }
+            else{
+                    x += speedX;
+                    y += speedY;
+            }
+            explode = isExplode();
         }
-        if(this.isExplode()){
-            new Explosion(panel,x,y);
-            speedX = speedY = 0;
-        }
-        x += speedX;
-        y += speedY;
     }
     private boolean isExplode(){
-        for(Character character: panel.list){
+        for(Character character: panel.characters){
             if(collision(character)){
-                this.getDamage();
+//                this.getDamage();
                 if(this.source.getClass() != character.getClass()){
                     character.damaged();
                     return true;
+                }
+                else{
+                    this.getDamage();
+                    return false;
                 }
             }
         }
@@ -66,11 +116,11 @@ public class Bullet {
             if(collision(bullet) && this != bullet){
                 this.getDamage();
                 bullet.getDamage();
-                return true;
+                return false;
             }
         }
         for(Block block: panel.blocks){
-            if(this.collision(block)){
+            if(block.collision(this)){
                 this.getDamage();
                 block.getDamage();
                 return true;
@@ -85,7 +135,7 @@ public class Bullet {
         }
         return false;
     }
-    private void getDamage(){
+    public void getDamage(){
         panel.trash.add(this);
         this.source.bullet = null;
     }
@@ -100,16 +150,13 @@ public class Bullet {
         if(this.source == character){
             return false;
         }
-        return panel.collison(this.getRectangle2D(), character.getRectangle2D());
+        return panel.collision(this.getRectangle2D(), character.getRectangle2D());
     }
     public boolean collision(Bullet bullet){
-        return panel.collison(this.getRectangle2D(), bullet.getRectangle2D());
-    }
-    public boolean collision(Block block){
-        return panel.collison(this.getRectangle2D(), block.getRectangle2D(true));
+        return panel.collision(this.getRectangle2D(), bullet.getRectangle2D());
     }
     public boolean collision(RandomObject randomObject){
-        return panel.collison(this.getRectangle2D(), randomObject.getRectangle2D());
+        return panel.collision(this.getRectangle2D(), randomObject.getRectangle2D());
     }
     public Rectangle2D getRectangle2D(){
         return new Rectangle2D.Double(x,y,image.getWidth(), image.getHeight());

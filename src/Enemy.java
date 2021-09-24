@@ -9,7 +9,7 @@ import java.util.Random;
 public class Enemy extends Character{
     Random rand = new Random();
     int timeToChangeDirection;
-    public Enemy(MyPanel panel, int x, int y){
+    public Enemy(GamePanel panel, int x, int y){
         super(panel);
         reloadTime = 70;
         direction = rand.nextInt(4);
@@ -31,15 +31,14 @@ public class Enemy extends Character{
     }
     @Override
     public void move(){
-        timeToChangeDirection++;
-        if(timeToChangeDirection >= 150){
+        if(++timeToChangeDirection >= 150){
             timeToChangeDirection= 0;
             direction = rand.nextInt(4);
             changeSpeed();
         }
         this.condition();
         super.move();
-        image = allImage.get(direction).get(0);
+        image = allImage.get(direction).get(count);
         this.fire();
     }
     @Override

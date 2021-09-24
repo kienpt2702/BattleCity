@@ -3,7 +3,7 @@ import java.io.File;
 import java.io.IOException;
 
 public class Health extends RandomObject{
-    public Health(MyPanel panel){
+    public Health(GamePanel panel){
         super(panel);
     }
     @Override

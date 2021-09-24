@@ -3,7 +3,7 @@ import java.io.File;
 import java.io.IOException;
 
 public class Flag extends Block{
-    public Flag(MyPanel panel, int x, int y) {
+    public Flag(GamePanel panel, int x, int y) {
         super(panel, x, y);
         health = 1;
     }
@@ -18,5 +18,6 @@ public class Flag extends Block{
     public void getDamage(){
         super.getDamage();
         panel.endGame();
+        panel.controlObject.endGame = true;
     }
 }

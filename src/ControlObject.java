@@ -4,18 +4,18 @@ import java.util.Random;
 
 public class ControlObject {
     ControlLife controlLife;
-    MyPanel panel;
+    GamePanel panel;
     Random rand = new Random();
-    boolean endGame;
-    int totalEnemy = 10;
-    int enemyLeft, timeToDrop;
-    private static final int ENEMY_ON_STAGE = 5;
     Player player;
-    public ControlObject(MyPanel panel){
+    boolean endGame;
+    int totalEnemy,enemyLeft, timeToDrop;
+    private static final int ENEMY_ON_STAGE = 5;
+    public ControlObject(GamePanel panel){
+        totalEnemy = 1;
+        timeToDrop = 500;
         this.panel = panel;
         this.init();
         controlLife = new ControlLife(this);
-        timeToDrop = 500;
     }
     public void init(){
         player = new Player(panel);
@@ -25,7 +25,7 @@ public class ControlObject {
         enemyLeft = totalEnemy - panel.gameMap.posList.size();
     }
     public void update(){
-        for(Character character: panel.list){
+        for(Character character: panel.characters){
             character.move();
         }
         // use counting for loop to avoid concurrentModification????:
@@ -33,7 +33,7 @@ public class ControlObject {
             panel.bullets.get(i).move();
         }
         this.removeTrash();
-        if(panel.list.size()-1 < ENEMY_ON_STAGE && enemyLeft> 0){
+        if(panel.characters.size()-1 < ENEMY_ON_STAGE && enemyLeft> 0){
             ArrayList<int[]> position = panel.gameMap.posList;
             int[] randPos = position.get(rand.nextInt(position.size()));
             new Enemy(panel,randPos[0]*30, randPos[1]*30);
@@ -41,22 +41,27 @@ public class ControlObject {
         }
         this.generateRandomObject();
         if(totalEnemy <= 0){
-            panel.endGame();
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            panel.popMenuForNextMap();
+        }
+        else if(endGame){
+            panel.popMenuToPlayAgain();
         }
     }
     public void paint(Graphics2D g2d){
         panel.gameMap.loadMap(g2d);
+        for(Character character: panel.characters){
+            character.paint(g2d);
+        }
         for(Block block: panel.blocks){
             block.paint(g2d);
         }
-        for(Character character: panel.list){
-            character.paint(g2d);
-        }
         for(Bullet bullet: panel.bullets){
             bullet.paint(g2d);
-        }
-        for(Explosion explosion: panel.explosions){
-            explosion.paint(g2d);
         }
         for(RandomObject rand: panel.randomObjects){
             rand.paint(g2d);
@@ -75,7 +80,7 @@ public class ControlObject {
         }
     }
     private void removeTrash(){
-        panel.list.removeIf(character -> panel.trash.contains(character));
+        panel.characters.removeIf(character -> panel.trash.contains(character));
         panel.bullets.removeIf(bullet->(bullet.needToDelete()));
         panel.explosions.removeIf(explosion -> panel.trash.contains(explosion));
         panel.blocks.removeIf((block -> panel.trash.contains(block)));

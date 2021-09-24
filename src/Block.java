@@ -8,10 +8,10 @@ import java.io.IOException;
 public class Block{
     int coorX, coorY;
     int x,y;
-    BufferedImage image;
     int health;
-    MyPanel panel;
-    public Block(MyPanel panel, int x, int y){
+    GamePanel panel;
+    BufferedImage image;
+    public Block(GamePanel panel, int x, int y){
         setImage();
         // in 2D array-> reversed
         coorX = y;
@@ -43,5 +43,11 @@ public class Block{
     }
     public Rectangle2D getRectangle2D(boolean bullet){
         return new Rectangle2D.Double(x,y,image.getWidth(),image.getHeight());
+    }
+    public boolean collision(Character character){
+        return panel.collision(character.getRectangle2D(), this.getRectangle2D());
+    }
+    public boolean collision(Bullet bullet){
+        return panel.collision(bullet.getRectangle2D(), this.getRectangle2D());
     }
 }

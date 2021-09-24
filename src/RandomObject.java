@@ -6,10 +6,10 @@ import java.util.Random;
 
 abstract public class RandomObject {
     Random random;
-    MyPanel panel;
+    GamePanel panel;
     BufferedImage image;
     int x,y;
-    public RandomObject(MyPanel panel){
+    public RandomObject(GamePanel panel){
         random = new Random();
         this.panel = panel;
         setImage();

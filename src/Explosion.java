@@ -5,22 +5,28 @@ import java.io.File;
 import java.io.IOException;
 
 public class Explosion {
-    MyPanel panel;
+    GamePanel panel;
     int x, y, count;
     BufferedImage image;
-    public Explosion(MyPanel myPanel, int x, int y){
-        this.panel = myPanel;
+    Bullet bullet;
+    public Explosion(Bullet bullet){
+        this.bullet = bullet;
+//        this.panel = myPanel;
+//        this.x = x;
+//        this.y = y;
+//        panel.explosions.add(this);
+    }
+    public void setPosition(int x, int y){
         this.x = x;
         this.y = y;
-        panel.explosions.add(this);
     }
-    public void paint(Graphics2D g2d){
+    public void paint(Graphics2D g2d, int x, int y){
         try {
             image = ImageIO.read(new File("png/Explosion/"+count+".png"));
         } catch (IOException e) {
         }
         g2d.drawImage(image,x,y,null);
         count++;
-        if(count > 2) panel.trash.add(this);
+        if(count > 2) bullet.getDamage();
     }
 }

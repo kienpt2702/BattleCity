@@ -4,7 +4,7 @@ import java.util.ArrayList;
 public class ControlMusic {
     ArrayList<Music> musicList;
     ArrayList<Music> deletedMusic;
-    Music intro,outro;
+    Music intro;
     public ControlMusic(){
         musicList = new ArrayList<>(4);
         deletedMusic = new ArrayList<>();
@@ -14,16 +14,9 @@ public class ControlMusic {
         this.add(intro);
     }
     public void update(){
-//        if(intro != null){
-//            if(intro.isClosed){
-//                System.out.println(true);
-//                this.add("Battle City (MP3)/2.wav");
-//                intro = null;
-//            }
-//        }
         for(Music music: musicList){
             music.update();
-            if(!music.clip.isOpen()) deletedMusic.add(music);
+            if(music.isClosed) deletedMusic.add(music);
         }
         musicList.removeIf(music -> deletedMusic.contains(music));
         deletedMusic.clear();

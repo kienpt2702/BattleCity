@@ -1,15 +1,14 @@
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+import java.util.ArrayList;
 
 public class test extends JFrame implements ActionListener {
     boolean hasStart;
-    MyPanel panel;
+
+    GamePanel panel;
     JButton button, button2,button3;
-    Panel p = new Panel(this);
+//    Menu p = new Menu(this);
     public test(){
 //        //this.setFocusable(true);
 //        button = new JButton("Game");
@@ -25,7 +24,9 @@ public class test extends JFrame implements ActionListener {
 //        this.add(button);
 //        this.add(button2);
 //        this.add(button3);
-        this.add(p);
+
+
+//        this.add(p);
         this.pack();
 
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -72,12 +73,12 @@ public class test extends JFrame implements ActionListener {
             System.exit(0);
         }
         if(hasStart){
-            panel = new MyPanel();
+            panel = new GamePanel(panel.myFrame);
             this.add(panel);
             this.setVisible(true);
             this.remove(button);
 //            this.remove(p);
-            p.setVisible(false);
+//            p.setVisible(false);
             this.remove(button2);
             panel.startGame();
             hasStart = false;
