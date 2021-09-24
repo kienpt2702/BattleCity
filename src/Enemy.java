@@ -3,31 +3,29 @@ import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Random;
 
 public class Enemy extends Character{
     Random rand = new Random();
     int timeToChangeDirection;
+    boolean superTank;
     public Enemy(GamePanel panel, int x, int y){
         super(panel);
         reloadTime = 70;
-        direction = rand.nextInt(4);
-        this.changeSpeed();
-        allImage = new HashMap<>();
-        try {
-            for(int i =0; i <=3; i++){
-                imageDirection = new ArrayList<>();
-                for(int j =0; j<=2; j++){
-                    imageDirection.add(ImageIO.read(new File("png/"+i+"/"+j+".png")));
-                }
-                allImage.put(i, imageDirection);
-            }
-        } catch (IOException e) {
+        if(rand.nextInt(2) == 1){
+            superTank = true;
         }
-        image = allImage.get(direction).get(0);
+        direction = rand.nextInt(4);
         this.x = x;
         this.y = y;
+    }
+    @Override
+    public void changeSpeed(){
+        super.changeSpeed();
+        if(superTank){
+            speedX *= 1.5f; 
+            speedY *= 1.5f;
+        }
     }
     @Override
     public void move(){
@@ -56,6 +54,21 @@ public class Enemy extends Character{
             changeSpeed();
         }
     }
+
+    @Override
+    public void setImage() {
+        try {
+            for(int i =0; i <=3; i++){
+                imageDirection = new ArrayList<>();
+                for(int j =0; j<=2; j++){
+                    imageDirection.add(ImageIO.read(new File("png/"+i+"/"+j+".png")));
+                }
+                allImage.put(i, imageDirection);
+            }
+        } catch (IOException e) {
+        }
+    }
+
     @Override
     public void damaged(){
         if(immortalTime <= 0){

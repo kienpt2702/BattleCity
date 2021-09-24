@@ -11,7 +11,7 @@ public class ControlObject {
     int totalEnemy,enemyLeft, timeToDrop;
     private static final int ENEMY_ON_STAGE = 5;
     public ControlObject(GamePanel panel){
-        totalEnemy = 1;
+        totalEnemy = 10;
         timeToDrop = 500;
         this.panel = panel;
         this.init();
@@ -82,7 +82,7 @@ public class ControlObject {
     private void removeTrash(){
         panel.characters.removeIf(character -> panel.trash.contains(character));
         panel.bullets.removeIf(bullet->(bullet.needToDelete()));
-        panel.explosions.removeIf(explosion -> panel.trash.contains(explosion));
+//        panel.explosions.removeIf(explosion -> panel.trash.contains(explosion));
         panel.blocks.removeIf((block -> panel.trash.contains(block)));
         panel.randomObjects.removeIf(randomObject -> panel.trash.contains(randomObject));
         panel.trash.clear();

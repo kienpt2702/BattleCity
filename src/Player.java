@@ -5,22 +5,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Player extends Character{
-    boolean pressOtherKey;
     private int health;
     public Player(GamePanel panel){
         super(panel);
         health = 3;
-        allImage = new HashMap<>();
-        try {
-            for(int i =0; i <=3; i++){
-                imageDirection = new ArrayList<>();
-                for(int j =0; j<=2; j++){
-                    imageDirection.add(ImageIO.read(new File("png/"+i+"/"+j+".png")));
-                }
-                allImage.put(i, imageDirection);
-            }
-        } catch (IOException e) {
-        }
         image = allImage.get(0).get(0);
     }
     public int getHealth(){return health;}
@@ -45,6 +33,21 @@ public class Player extends Character{
         super.condition();
         super.move();
     }
+
+    @Override
+    public void setImage() {
+        try {
+            for(int i =0; i <=3; i++){
+                imageDirection = new ArrayList<>();
+                for(int j =0; j<=2; j++){
+                    imageDirection.add(ImageIO.read(new File("png/"+i+"/"+j+".png")));
+                }
+                allImage.put(i, imageDirection);
+            }
+        } catch (IOException e) {
+        }
+    }
+
     @Override
     public void fire(){
         if(bullet == null && health > 0){

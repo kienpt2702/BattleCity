@@ -11,7 +11,7 @@ public class GamePanel extends JPanel implements Runnable{
     ControlMusic controlMusic;
     ArrayList<Character> characters = new ArrayList<>(6);
     ArrayList<Bullet> bullets = new ArrayList<>(50);
-    ArrayList<Explosion> explosions = new ArrayList<>(50);
+//    ArrayList<Explosion> explosions = new ArrayList<>(50);
     ArrayList<Block> blocks = new ArrayList<>(20);
     ArrayList trash = new ArrayList<>();
     ArrayList<RandomObject> randomObjects = new ArrayList<>();
@@ -58,7 +58,7 @@ public class GamePanel extends JPanel implements Runnable{
                 this.update();
                 this.repaint();
                 try {
-                    Thread.sleep(10);
+                    Thread.sleep(13);
                 } catch (InterruptedException e) {
                 }
                 if(exit) break;

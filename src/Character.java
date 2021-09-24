@@ -18,6 +18,8 @@ abstract class Character {
         this.panel = panel;
         panel.characters.add(this);
         immortalTime = 100;
+        allImage = new HashMap<>(4);
+        setImage();
     }
     public void paint(Graphics2D g2d){
         g2d.drawImage(image,x,y,null);
@@ -35,7 +37,7 @@ abstract class Character {
                 y += speedY;
             }
         }
-        if (++count >2){
+        if (++count >=2){
             count = 0;
         }
         reloadTime--;
@@ -73,6 +75,7 @@ abstract class Character {
         }
         return false;
     }
+    abstract public void setImage();
     abstract public void fire();
     abstract public void damaged();
     public void increaseHealth(){}
