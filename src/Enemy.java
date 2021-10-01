@@ -16,6 +16,7 @@ public class Enemy extends Character{
             superTank = true;
         }
         direction = rand.nextInt(4);
+        image = allImage.get(direction).get(0);
         this.x = x;
         this.y = y;
     }
