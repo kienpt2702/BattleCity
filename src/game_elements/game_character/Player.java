@@ -1,10 +1,13 @@
+package game_elements.game_character;
+
+import game_main.GamePanel;
+
 import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 
-public class Player extends Character{
+public class Player extends TankCharacter {
     private int health;
     public Player(GamePanel panel){
         super(panel);

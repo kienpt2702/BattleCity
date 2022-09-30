@@ -1,3 +1,6 @@
+package game_main;
+
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -5,14 +8,14 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 
-public class Menu extends JPanel implements ActionListener{
+public class GameMenu extends JPanel implements ActionListener{
     JButton startButton, continueButton,restart,exit;
     GameFrame frame;
     JLabel gameTitle, gameState;
     GamePanel gamePanel;
     Font arcadeFont;
     boolean nextLevel;
-    public Menu(GameFrame myFrame){
+    public GameMenu(GameFrame myFrame){
         frame = myFrame;
         gameTitle = new JLabel();
         gameState = new JLabel();

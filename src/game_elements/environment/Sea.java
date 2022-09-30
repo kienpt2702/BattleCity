@@ -1,10 +1,16 @@
+package game_elements.environment;
+
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-public class Sea extends Block{
+import game_elements.game_character.Bullet;
+import game_elements.game_character.TankCharacter;
+import game_main.GamePanel;
+
+public class Sea extends Block {
     static BufferedImage sea;
     public Sea(GamePanel panel, int x, int y) {
         super(panel, x, y);
@@ -20,7 +26,7 @@ public class Sea extends Block{
     @Override
     public void paint(Graphics2D g2d){}
     @Override
-    public boolean collision(Character character){
+    public boolean collision(TankCharacter character){
         if(super.collision(character)){
             character.slowDown = true;
         }

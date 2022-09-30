@@ -1,3 +1,9 @@
+package game_elements.environment;
+
+import game_elements.game_character.Bullet;
+import game_elements.game_character.TankCharacter;
+import game_main.GamePanel;
+
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
@@ -10,7 +16,7 @@ public class Block{
     int x,y;
     int health;
     GamePanel panel;
-    BufferedImage image;
+    public BufferedImage image;
     public Block(GamePanel panel, int x, int y){
         setImage();
         // in 2D array-> reversed
@@ -44,7 +50,7 @@ public class Block{
     public Rectangle2D getRectangle2D(boolean bullet){
         return new Rectangle2D.Double(x,y,image.getWidth(),image.getHeight());
     }
-    public boolean collision(Character character){
+    public boolean collision(TankCharacter character){
         return panel.collision(character.getRectangle2D(), this.getRectangle2D());
     }
     public boolean collision(Bullet bullet){

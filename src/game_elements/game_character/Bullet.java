@@ -1,3 +1,10 @@
+package game_elements.game_character;
+
+import game_controllers.util.Explosion;
+import game_elements.environment.Block;
+import game_elements.environment.RandomObject;
+import game_main.GamePanel;
+
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
@@ -10,9 +17,9 @@ public class Bullet {
     Explosion explosion;
     BufferedImage image;
     GamePanel panel;
-    Character source;
-    boolean slowDown, explode;
-    public Bullet(GamePanel panel, int x, int y, int direction, Character source){
+    TankCharacter source;
+    public boolean slowDown, explode;
+    public Bullet(GamePanel panel, int x, int y, int direction, TankCharacter source){
         this.panel = panel;
         this.x = x;
         this.y = y;
@@ -65,7 +72,7 @@ public class Bullet {
 //            }
 //        }
 //        else{
-//            new Explosion(panel,x,y);
+//            new controller.util.Explosion(panel,x,y);
 //        }
         if(!explode){
             switch (direction) {
@@ -99,7 +106,7 @@ public class Bullet {
         }
     }
     private boolean isExplode(){
-        for(Character character: panel.characters){
+        for(TankCharacter character: panel.characters){
             if(collision(character)){
 //                this.getDamage();
                 if(this.source.getClass() != character.getClass()){
@@ -146,7 +153,7 @@ public class Bullet {
         }
         return false;
     }
-    public boolean collision(Character character){
+    public boolean collision(TankCharacter character){
         if(this.source == character){
             return false;
         }

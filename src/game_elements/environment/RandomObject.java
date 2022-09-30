@@ -1,3 +1,7 @@
+package game_elements.environment;
+
+import game_elements.game_character.TankCharacter;
+import game_main.GamePanel;
 
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
@@ -7,7 +11,7 @@ import java.util.Random;
 abstract public class RandomObject {
     Random random;
     GamePanel panel;
-    BufferedImage image;
+    public BufferedImage image;
     int x,y;
     public RandomObject(GamePanel panel){
         random = new Random();
@@ -21,7 +25,7 @@ abstract public class RandomObject {
         return new Rectangle2D.Double(x,y,image.getWidth(), image.getHeight());
     }
     abstract public void setImage();
-    abstract public void effect(Character character);
+    abstract public void effect(TankCharacter character);
     public void damaged(){
         panel.trash.add(this);
         panel.controlMusic.add("Battle City (MP3)/SFX hitGift.wav");

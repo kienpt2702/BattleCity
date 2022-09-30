@@ -1,3 +1,8 @@
+package game_controllers.util;
+
+import game_elements.game_character.Bullet;
+import game_main.GamePanel;
+
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;

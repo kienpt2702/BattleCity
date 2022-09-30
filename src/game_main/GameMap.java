@@ -1,14 +1,19 @@
+package game_main;
+
+import game_elements.environment.*;
+
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
 
 public class GameMap {
-    ArrayList<int[]> posList = new ArrayList<>(5);
+    public int[][] grids;
+    public ArrayList<int[]> posList = new ArrayList<>(5);
     Grid grid;
     int width, height;
     LinkedHashMap<Integer, int[][]> allMaps;
-    int[][] grids;
+    // fix later
     public GameMap(GamePanel panel, int level) {
         grid = new Grid();
         allMaps = new LinkedHashMap<>();

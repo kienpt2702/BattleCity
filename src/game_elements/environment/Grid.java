@@ -1,3 +1,5 @@
+package game_elements.environment;
+
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -9,7 +11,7 @@ public class Grid {
     public Grid(){
         try {
             image = ImageIO.read(new File("png/Grid/grid0.png"));
-            deathFlag = ImageIO.read(new File("png/deadflag.png"));
+            deathFlag = ImageIO.read(new File("png/flag.png"));
         } catch (IOException e) {
         }
         width = image.getWidth();

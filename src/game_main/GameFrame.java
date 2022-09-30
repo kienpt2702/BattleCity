@@ -1,12 +1,14 @@
+package game_main;
+
 import javax.swing.*;
 
 
 public class GameFrame extends JFrame {
-    Menu menu;
+    GameMenu menu;
     public static final int MAX_LEVEL = 2;
     private static int Level = 1;
     public GameFrame(){
-        menu = new Menu(this);
+        menu = new GameMenu(this);
         this.add(menu);
         this.setLocationRelativeTo(null);
         this.setResizable(false);

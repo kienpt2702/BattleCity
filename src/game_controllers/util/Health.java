@@ -1,8 +1,14 @@
+package game_controllers.util;
+
+import game_elements.game_character.TankCharacter;
+import game_elements.environment.RandomObject;
+import game_main.GamePanel;
+
 import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.IOException;
 
-public class Health extends RandomObject{
+public class Health extends RandomObject {
     public Health(GamePanel panel){
         super(panel);
     }
@@ -14,7 +20,7 @@ public class Health extends RandomObject{
         }
     }
     @Override
-    public void effect(Character character) {
+    public void effect(TankCharacter character) {
         character.increaseHealth();
         damaged();
     }

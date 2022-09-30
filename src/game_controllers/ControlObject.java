@@ -1,3 +1,12 @@
+package game_controllers;
+
+import game_elements.game_character.*;
+import game_elements.game_character.TankCharacter;
+import game_controllers.util.Health;
+import game_elements.environment.Block;
+import game_elements.environment.RandomObject;
+import game_main.GamePanel;
+
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Random;
@@ -6,9 +15,10 @@ public class ControlObject {
     ControlLife controlLife;
     GamePanel panel;
     Random rand = new Random();
-    Player player;
-    boolean endGame;
-    int totalEnemy,enemyLeft, timeToDrop;
+    public Player player;
+    // fix later
+    public boolean endGame;
+    public int totalEnemy,enemyLeft, timeToDrop;
     private static final int ENEMY_ON_STAGE = 5;
     public ControlObject(GamePanel panel){
         totalEnemy = 10;
@@ -25,7 +35,7 @@ public class ControlObject {
         enemyLeft = totalEnemy - panel.gameMap.posList.size();
     }
     public void update(){
-        for(Character character: panel.characters){
+        for(TankCharacter character: panel.characters){
             character.move();
         }
         // use counting for loop to avoid concurrentModification????:
@@ -36,7 +46,8 @@ public class ControlObject {
         if(panel.characters.size()-1 < ENEMY_ON_STAGE && enemyLeft> 0){
             ArrayList<int[]> position = panel.gameMap.posList;
             int[] randPos = position.get(rand.nextInt(position.size()));
-            new Enemy(panel,randPos[0]*30, randPos[1]*30);
+            if(enemyLeft <= 5) new FastTank(panel,randPos[0]*30, randPos[1]*30);
+            else new Enemy(panel,randPos[0]*30, randPos[1]*30);
             enemyLeft--;
         }
         this.generateRandomObject();
@@ -54,7 +65,7 @@ public class ControlObject {
     }
     public void paint(Graphics2D g2d){
         panel.gameMap.loadMap(g2d);
-        for(Character character: panel.characters){
+        for(TankCharacter character: panel.characters){
             character.paint(g2d);
         }
         for(Block block: panel.blocks){

@@ -1,3 +1,5 @@
+package game_main;
+
 public class Game {
     public Game(){
         new GameFrame();

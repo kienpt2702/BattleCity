@@ -1,3 +1,7 @@
+package game_elements.environment;
+
+import game_main.GamePanel;
+
 import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.IOException;

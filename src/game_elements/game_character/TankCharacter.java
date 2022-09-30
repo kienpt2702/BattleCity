@@ -1,20 +1,26 @@
+package game_elements.game_character;
+
+import game_elements.environment.Block;
+import game_elements.environment.RandomObject;
+import game_main.GamePanel;
+
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-abstract class Character {
-    boolean slowDown;
-    int x, y, speedX, speedY, immortalTime;
-    int count, direction;
-    int reloadTime;
-    GamePanel panel;
-    HashMap<Integer, ArrayList<BufferedImage>> allImage;
-    ArrayList<BufferedImage> imageDirection;
-    BufferedImage image;
-    Bullet bullet;
-    public Character(GamePanel panel){
+public abstract class TankCharacter {
+    public boolean slowDown;
+    public int x, y, speedX, speedY, immortalTime;
+    public int count, direction;
+    public int reloadTime;
+    public GamePanel panel;
+    public HashMap<Integer, ArrayList<BufferedImage>> allImage;
+    public ArrayList<BufferedImage> imageDirection;
+    public BufferedImage image;
+    public Bullet bullet;
+    public TankCharacter(GamePanel panel){
         this.panel = panel;
         panel.characters.add(this);
         immortalTime = 100;
@@ -54,7 +60,7 @@ abstract class Character {
         return new Rectangle2D.Double(x+speedX,y+speedY, image.getWidth(), image.getHeight());
     }
     public boolean collision(){
-        for(Character character : panel.characters){
+        for(TankCharacter character : panel.characters){
             if(this != character){
                 if(panel.collision(this.getRectangle2D(), character.getRectangle2D())){
                     return true;
@@ -81,22 +87,22 @@ abstract class Character {
     public void increaseHealth(){}
     public void changeSpeed(){
         switch (direction) {
-            case 0:
+            case 0 -> {
                 speedY = 2;
                 speedX = 0;
-                break;
-            case 1:
+            }
+            case 1 -> {
                 speedX = -2;
                 speedY = 0;
-                break;
-            case 2:
+            }
+            case 2 -> {
                 speedX = 2;
                 speedY = 0;
-                break;
-            case 3:
+            }
+            case 3 -> {
                 speedY = -2;
                 speedX = 0;
-                break;
+            }
         }
     }
 }

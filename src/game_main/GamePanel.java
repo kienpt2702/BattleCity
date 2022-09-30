@@ -1,3 +1,13 @@
+package game_main;
+
+import game_elements.game_character.Bullet;
+import game_elements.game_character.Player;
+import game_elements.game_character.TankCharacter;
+import game_controllers.ControlMusic;
+import game_controllers.ControlObject;
+import game_elements.environment.Block;
+import game_elements.environment.RandomObject;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -5,26 +15,25 @@ import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 
 public class GamePanel extends JPanel implements Runnable{
-    boolean exit,isRunning;
-    Thread thread;
-    ControlObject controlObject;
-    ControlMusic controlMusic;
-    ArrayList<Character> characters = new ArrayList<>(6);
-    ArrayList<Bullet> bullets = new ArrayList<>(50);
-//    ArrayList<Explosion> explosions = new ArrayList<>(50);
-    ArrayList<Block> blocks = new ArrayList<>(20);
-    ArrayList trash = new ArrayList<>();
-    ArrayList<RandomObject> randomObjects = new ArrayList<>();
-    GameMap gameMap;
-    Player player;
-    GameFrame myFrame;
-    Menu menu;
+    public boolean exit,isRunning;
+    public Thread thread;
+    public ControlObject controlObject;
+    public ControlMusic controlMusic;
+    public ArrayList<TankCharacter> characters = new ArrayList<>(6);
+    public ArrayList<Bullet> bullets = new ArrayList<>(50);
+    public ArrayList<Block> blocks = new ArrayList<>(20);
+    public ArrayList trash = new ArrayList<>();
+    public ArrayList<RandomObject> randomObjects = new ArrayList<>();
+    public GameMap gameMap;
+    public Player player;
+    public GameFrame myFrame;
+    public GameMenu menu;
     public GamePanel(GameFrame myFrame){
         this.myFrame = myFrame;
-        gameMap = new GameMap(this, myFrame.getLevel());
-        controlObject = new ControlObject(this);
-        player = controlObject.player;
-        controlMusic = new ControlMusic();
+        this.gameMap = new GameMap(this, myFrame.getLevel());
+        this.controlObject = new ControlObject(this);
+        this.player = controlObject.player;
+        this.controlMusic = new ControlMusic();
         this.setPreferredSize(new Dimension(600,650));
         initKeyBinding();
     }

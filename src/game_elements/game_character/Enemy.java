@@ -1,3 +1,6 @@
+package game_elements.game_character;
+
+import game_main.GamePanel;
 
 import javax.imageio.ImageIO;
 import java.io.File;
@@ -5,16 +8,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Enemy extends Character{
+public class Enemy extends TankCharacter {
     Random rand = new Random();
     int timeToChangeDirection;
-    boolean superTank;
     public Enemy(GamePanel panel, int x, int y){
         super(panel);
         reloadTime = 70;
-        if(rand.nextInt(2) == 1){
-            superTank = true;
-        }
         direction = rand.nextInt(4);
         image = allImage.get(direction).get(0);
         this.x = x;
@@ -23,10 +22,6 @@ public class Enemy extends Character{
     @Override
     public void changeSpeed(){
         super.changeSpeed();
-        if(superTank){
-            speedX *= 1.5f; 
-            speedY *= 1.5f;
-        }
     }
     @Override
     public void move(){
