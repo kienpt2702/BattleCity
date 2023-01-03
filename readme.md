@@ -24,3 +24,7 @@ Player can control his/her tank using keyboard:
 
 There are also various buffs randomly appearing during the game. Play can shoot or go over them to get these extras! 
 
+
+
+https://user-images.githubusercontent.com/85716771/210301599-0a00ded6-8b6d-4af8-9d82-27b6fddafd03.mp4
+
