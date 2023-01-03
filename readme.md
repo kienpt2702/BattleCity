@@ -22,7 +22,7 @@ Player can control his/her tank using keyboard:
 + Shoot: A
 + Pause: Enter 
 
-There are also various buffs randomly appearing during the game. Play can shoot or go over them to get these extras! 
+There are also various buffs randomly appearing during the game. Player can shoot or go over them to get these extras! 
 
 
 
