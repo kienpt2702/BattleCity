@@ -13,6 +13,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 public class GamePanel extends JPanel implements Runnable{
     public boolean exit,isRunning;
@@ -22,7 +23,7 @@ public class GamePanel extends JPanel implements Runnable{
     public ArrayList<TankCharacter> characters = new ArrayList<>(6);
     public ArrayList<Bullet> bullets = new ArrayList<>(50);
     public ArrayList<Block> blocks = new ArrayList<>(20);
-    public ArrayList trash = new ArrayList<>();
+    public HashSet trash = new HashSet();
     public ArrayList<RandomObject> randomObjects = new ArrayList<>();
     public GameMap gameMap;
     public Player player;
