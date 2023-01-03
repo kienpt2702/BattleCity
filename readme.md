@@ -4,7 +4,7 @@ This is a modified version of the famous 8-bit game Battle City, a multi-directi
 
 ## Gameplay
 
-This and the first Battle City are essentially similar. A tank is controlled by the player, who fires projectiles at
+Gameplay is similar to the original Battle City. A tank is controlled by the player, who fires projectiles at
 nearby opponent tanks to destroy them. In contrast to the original, the opposing tanks now appear on the screen at
 random times and aim to destroy both the player's tank and the player's base, which is shown on the screen as a flag
 symbol. When all enemy tanks are destroyed, a level is finished and player can proceed to next level. The game is over
